@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.873e3332.css",
-    "main.js": "/static/js/main.d983d7ff.js",
-    "static/media/hamburger1.png": "/static/media/hamburger1.2486cd74f7b2c2797a02.png",
-    "static/media/hamburger3.png": "/static/media/hamburger3.dfa1c3c03d7978b52c76.png",
-    "static/media/hamburger4.png": "/static/media/hamburger4.abaf3402432a41e4a242.png",
-    "static/media/hamburger2.png": "/static/media/hamburger2.ebb2d343ac9bf6156290.png",
-    "static/media/fondo1280x720.png": "/static/media/fondo1280x720.0da4fe37a06e3613aeff.png",
-    "static/media/fondo1024x720.png": "/static/media/fondo1024x720.15593c1545dca9ae200d.png",
-    "static/media/fondo920x620.png": "/static/media/fondo920x620.489badd9d758f01d4323.png",
-    "static/media/fondo480x500.png": "/static/media/fondo480x500.34c2e4245d2408900a73.png",
-    "index.html": "/index.html",
-    "main.873e3332.css.map": "/static/css/main.873e3332.css.map",
-    "main.d983d7ff.js.map": "/static/js/main.d983d7ff.js.map"
+    "main.css": "/foodandeat/static/css/main.873e3332.css",
+    "main.js": "/foodandeat/static/js/main.068f35c2.js",
+    "static/media/hamburger1.png": "/foodandeat/static/media/hamburger1.2486cd74f7b2c2797a02.png",
+    "static/media/hamburger3.png": "/foodandeat/static/media/hamburger3.dfa1c3c03d7978b52c76.png",
+    "static/media/hamburger4.png": "/foodandeat/static/media/hamburger4.abaf3402432a41e4a242.png",
+    "static/media/hamburger2.png": "/foodandeat/static/media/hamburger2.ebb2d343ac9bf6156290.png",
+    "static/media/fondo1280x720.png": "/foodandeat/static/media/fondo1280x720.0da4fe37a06e3613aeff.png",
+    "static/media/fondo1024x720.png": "/foodandeat/static/media/fondo1024x720.15593c1545dca9ae200d.png",
+    "static/media/fondo920x620.png": "/foodandeat/static/media/fondo920x620.489badd9d758f01d4323.png",
+    "static/media/fondo480x500.png": "/foodandeat/static/media/fondo480x500.34c2e4245d2408900a73.png",
+    "index.html": "/foodandeat/index.html",
+    "main.873e3332.css.map": "/foodandeat/static/css/main.873e3332.css.map",
+    "main.068f35c2.js.map": "/foodandeat/static/js/main.068f35c2.js.map"
   },
   "entrypoints": [
     "static/css/main.873e3332.css",
-    "static/js/main.d983d7ff.js"
+    "static/js/main.068f35c2.js"
   ]
 }

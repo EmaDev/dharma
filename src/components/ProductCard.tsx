@@ -95,7 +95,6 @@ const PRODUCTS: Product[] = [
    { id: '895996', price: 950,img: 4,name: 'Parrillera', ingredients: 'Queso provoleta con chimichurri, morcilla, morrón a la plancha, cebolla roja y ketchup ahumado' }
 ]
 
-
 export const ProductCard = () => {
    const [products, setProducts] = useState<Product[]>(PRODUCTS);
    const [selectActive, setSelectActive] = useState<boolean>(false);
@@ -154,7 +153,7 @@ export const ProductCard = () => {
                }
             </SelectOptions>
          }
-         <Image src={require(`../assets/hamburger${img}.png`)} />
+         <Image src={require(`../assets/hamburger${img}.png`)} alt={`${name} imagen`} />
          <Name color="white">{name}</Name>
          <Description>{ingredients}</Description>
          <OrderButtons>
