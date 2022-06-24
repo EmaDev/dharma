@@ -6,16 +6,18 @@ import { useContext, useEffect, useState } from 'react';
 import { ProductOptionCard } from './OptionSelect';
 import { MoreLessButton } from './layouts/MoreLessButton';
 import { CartContext } from '../context/CartContext';
+import { ProductActiveCard } from './layouts/ProductActiveCard';
 
 const Container = styled.div`
    width: 90%;
    max-width: 400px;
    margin: auto;
    padding: .5rem;
-   border: 1px solid #fff;
+   border: 1px solid purple;
    color: #fff;
    text-align: center;
    position: relative;
+   box-shadow: 1px 1px 4px purple;
 `;
 
 const Select = styled.div`
@@ -25,7 +27,8 @@ const Select = styled.div`
    justify-content: space-between;
    color: ${({ color }) => color};
    padding: 1rem 2rem;
-   border-bottom: 1px solid  ${({ color }) => color};
+   /*border-bottom: 1px solid  ${({ color }) => color};*/
+   border-bottom: 1px solid purple;
    cursor: pointer;
 
    p{
@@ -33,53 +36,13 @@ const Select = styled.div`
       padding:0;
    }
 `;
-const Name = styled.h2`
-   font-size: 2.5rem;
-   color: ${({ color }) => color};
-   padding: 1rem;
-   border-bottom: 1px solid  ${({ color }) => color};
-   border-top: 1px solid  ${({ color }) => color};
-`;
 
-const Image = styled.img`
-   width: 250px;
-   height: 250px;
-   margin:auto;
-
-   &hover:{
-      background-color: red;
-   }
-`;
-
-const Description = styled.p`
-   text-align: center;
-   font-size: 2rem;
-`;
 
 const SelectOptions = styled.div`
    max-height: 300px;
    overflow: auto;
 `;
 
-const OrderButtons = styled.div`
-   display: flex;
-   width: 80%;
-   margin:auto;
-   justify-content: space-between;
-   align-items: center;
-   color: white; 
-
-   span{
-      font-size: 1.6rem;
-   }
-`;
-
-const Precio = styled.p`
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-`;
 
 interface Product {
    name: string;
@@ -99,9 +62,9 @@ export const ProductCard = () => {
    const [products, setProducts] = useState<Product[]>(PRODUCTS);
    const [selectActive, setSelectActive] = useState<boolean>(false);
    const [activeProduct, setActiveProduct] = useState<Product>(PRODUCTS[0]);
-   const [quantityState, setQuantityState] = useState<number>(1);
+   //const [quantityState, setQuantityState] = useState<number>(1);
    const { addItemToCart } = useContext(CartContext);
-   const { id, ingredients, name,price,img } = activeProduct;
+   //const { id, ingredients, name,price,img } = activeProduct;
 
    useEffect(() => {
       //TODO: traer productos
@@ -112,26 +75,15 @@ export const ProductCard = () => {
       const result = products.find(prod => prod.id === id);
       if (result) {
          setActiveProduct(result);
-         setQuantityState(1);
+         //setQuantityState(1);
          setSelectActive(false);
       }
-   }
-
-   const addProductToCart = () => {
-      addItemToCart({
-         price: 690,
-         name: activeProduct.name,
-         quantity: quantityState,
-         prodId: activeProduct.id
-      });
    }
 
    return (
       <Container>
          <BorderDiv size={{ height: 40, width: 5 }} position={'right'} dif={{ x: 70, z: 5 }} />
          <BorderDiv size={{ height: 20, width: 5 }} position={'left'} />
-         <BorderDiv bottom size={{ height: 20, width: 5 }} position={'left'} />
-         <BorderDiv bottom size={{ height: 20, width: 5 }} position={'right'} />
 
          <Select color="white" onClick={() => setSelectActive(!selectActive)}>
             <p>Selecciona</p>
@@ -153,29 +105,11 @@ export const ProductCard = () => {
                }
             </SelectOptions>
          }
-         <Image src={require(`../assets/hamburger${img}.png`)} alt={`${name} imagen`} />
-         <Name color="white">{name}</Name>
-         <Description>{ingredients}</Description>
-         <OrderButtons>
-            <div>
-               <span>Precio</span>
-               <Precio>{`$ ${price}`}</Precio>
-            </div>
-            <div>
-               <span>Cantidad</span>
-               <MoreLessButton
-                  number={quantityState}
-                  setNumber={setQuantityState}
-                  max={20} min={1} />
-            </div>
-         </OrderButtons>
-         <button onClick={addProductToCart}
-            style={{
-               width: '95%', padding: '1rem', margin: '2rem auto',
-               backgroundColor: 'purple', color: 'white', fontWeight: 'bold', borderRadius: '6px'
-            }}>
-            Agregar al Carrito
-         </button>
+
+         <ProductActiveCard 
+         product={activeProduct} 
+         addProdToCart={addItemToCart}/>
+         
       </Container>
    )
 }

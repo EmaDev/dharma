@@ -5,9 +5,11 @@ import { ImLocation } from 'react-icons/im';
 const Container = styled.footer<any>`
    background-color: ${({ bgCol }) => bgCol};
    padding: 1.5rem;
+   padding-top: 3rem;
    p{
     text-align: center;
     font-family: unset;
+    margin: 0;
     color: ${({ color }) => color};
    }
 `;
@@ -25,14 +27,7 @@ const Contact = styled.div`
   }
 `;
 
-const IconsContact = styled.div`
-   margin: auto;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   padding: 1rem 2rem;
-   background-color: red;
-`;
+
 const getYear = () => {
     let date = new Date;
     return date.getFullYear();

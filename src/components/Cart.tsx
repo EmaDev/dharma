@@ -5,13 +5,23 @@ import { ThemeContext } from '../context/ThemeContext';
 import { ItemCart } from './ItemCart';
 
 const Container = styled.section<any>`
-   width: 90%;
+   height: 100%;
    max-width: 600px;
    margin: auto;
    padding: 1.5rem;
-   margin-bottom: 3rem;
-   background-color: ${({ bgCol }) => bgCol};
+   //background-color: ${({ bgCol }) => bgCol};
    color: ${({ color }) => color};
+   border: 1px solid purple;
+   box-shadow: 1px 1px 4px purple;
+   h1{
+    text-align: center;
+    font-size: 2.5rem;
+   }
+
+   @media(max-width: 800px){
+    margin: 1rem auto;
+    width: 90%;
+   }
 `;
 const ContainerButtons = styled.div`
    margin: 2.5rem auto;
