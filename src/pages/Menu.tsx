@@ -4,19 +4,19 @@ import TitleSvgComponent from '../assets/TitleComponent';
 import { Cart } from '../components/Cart';
 
 const MenuSection = styled.section`
-   min-height: 100vh;
    background-color: ${({ color }) => color};
-   padding: 2rem 0;
+   padding: 2rem 0 4rem 0;
    margin: auto;
 `;
 const Container = styled.div`
    @media(min-width: 800px){
     margin: auto;
     display: grid;
-    grid-template-columns: 40% 60%;
+    justify-content: center;
+    grid-template-columns: 50% 50%;
     column-gap: .5rem;
    }
-   @media(min-width: 1100px){
+   @media(min-width: 1024px){
     width: 80%;
    }
 `;

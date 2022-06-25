@@ -12,7 +12,7 @@ const Container = styled.section<any>`
    //background-color: ${({ bgCol }) => bgCol};
    color: ${({ color }) => color};
    border: 1px solid purple;
-   box-shadow: 1px 1px 4px purple;
+   box-shadow: 1px 1px 12px purple;
    h1{
     text-align: center;
     font-size: 2.5rem;
@@ -24,17 +24,22 @@ const Container = styled.section<any>`
    }
 `;
 const ContainerButtons = styled.div`
-   margin: 2.5rem auto;
+   margin: 2.5rem 0;
    display: flex;
    justify-content: space-between;
    align-items: center;
+
+   h5{
+    font-size: 1.9rem;
+    font-weight: bold;
+    margin: 0;
+   }
 `;
 
 const ButtonConfirm = styled.button`
    background-color: purple;
-   padding: 1rem;
+   padding: 1rem .3rem;
    border-radius: 6px;
-
    a{
     text-decoration: none;
     color: white;
@@ -53,7 +58,7 @@ export const Cart = () => {
         cart.forEach(item => {
             total += item.price * item.quantity;
         });
-        return (<h1 style={{ textAlign: 'end', margin: 0 }}>{`Total: $ ${total}`}</h1>)
+        return (<h5>{`Total: $ ${total}`}</h5>)
     }
 
     const setMessageOrder = () => {

@@ -17,7 +17,7 @@ const Container = styled.div`
    color: #fff;
    text-align: center;
    position: relative;
-   box-shadow: 1px 1px 4px purple;
+   box-shadow: 1px 1px 12px purple;
 `;
 
 const Select = styled.div`

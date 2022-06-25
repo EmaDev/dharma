@@ -12,11 +12,12 @@ const Btn = styled.button`
 `;
 interface Props{
     text:string;
+    onClick: () => void;
 }
 
-export const Button = ({text}:Props) => {
+export const Button = ({text, onClick}:Props) => {
   return (
-    <Btn>
+    <Btn onClick={onClick}>
         {text}
     </Btn>
   )

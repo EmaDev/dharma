@@ -107,7 +107,7 @@ export const ProductActiveCard = ({ product, addProdToCart }: ProductProps) => {
                         max={20} min={1} />
                 </div>
             </OrderButtons>
-            <Button text='Agregar al Carrito'/>
+            <Button onClick={addProductToCart} text='Agregar al Carrito'/>
         </>
     )
 }
