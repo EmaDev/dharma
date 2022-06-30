@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
 import { IoMdClose, IoMdAlert } from 'react-icons/io';
 import { ThemeContext } from '../../context/ThemeContext';
+import { PHONE_NUMBER } from '../../helpers';
 
 interface Props {
     text?: string;
@@ -48,7 +49,7 @@ export const Alert = ({ text }: Props) => {
                     <AlertContent color={theme.palette.purpleLigth}>
                         <Text color={theme.palette.txtPrimary}>
                             <a id="app-whatsapp" target="_blanck" 
-                            href="https://api.whatsapp.com/send?phone=+541164340872&amp;text=Hola!&nbsp;me&nbsp;pueden&nbsp;apoyar?">
+                            href={`https://api.whatsapp.com/send?phone=+54${PHONE_NUMBER}&text=Quiero hacer un pedido`}>
                             {text}
                             </a>
                         </Text>

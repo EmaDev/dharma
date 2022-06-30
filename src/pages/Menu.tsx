@@ -7,6 +7,7 @@ const MenuSection = styled.section`
    background-color: ${({ color }) => color};
    padding: 2rem 0 4rem 0;
    margin: auto;
+   padding-bottom: 3rem;
 `;
 const Container = styled.div`
    @media(min-width: 800px){

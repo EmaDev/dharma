@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -19,7 +18,7 @@ const ProductCard = styled.div<any>`
 
 export const ProductOptionCard = ({ isActive, product, activateProd }: Props) => {
 
-    const {id,name,ingredients} = product;
+    const {id,name} = product;
 
     return (
         <ProductCard

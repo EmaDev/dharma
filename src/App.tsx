@@ -5,14 +5,14 @@ import { Alert } from './components/layouts/Alert';
 import { CartProvider } from './context/CartContext';
 import { Footer } from './components/Footer';
 
-
 function App() {
+
   return (
     <ThemeProvider>
       <CartProvider>
         <Header />
         <Menu />
-        <Footer/>
+        <Footer />
         <Alert text='Hacenos tu pedido aqui' />
       </CartProvider>
     </ThemeProvider>

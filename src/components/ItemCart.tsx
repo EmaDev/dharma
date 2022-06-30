@@ -6,18 +6,50 @@ import { MoreLessButton } from './layouts/MoreLessButton';
 
 interface Props {
     item: itemCart;
+    extrasPrice: {chedar:number;carne:number};
     updateItem: (id: string, quant: number) => void;
     removeItem: (id: string) => void;
 }
 const ItemCard = styled.div<any>`
-   padding: 1rem .5rem;
+   padding: 2rem .7rem;
    border: 1px solid ${({ bgCol }) => bgCol};
    color: ${({ color }) => color};
    border-radius: 2px;
-   margin:auto;
-   display: grid;
-   grid-template-columns: 55% 33% 12%;
+   display: flex;
    align-items: center;
+   overflow-x: auto;
+`;
+
+const ItemDescription = styled.div`
+   margin-right: 1rem;
+   display: flex;
+   -webkit-box-align: center;
+   align-items: center;
+   justify-content: space-between;
+   min-width: 75%;
+
+   p{
+    margin: 0 .3rem;
+    padding: 0;
+    font-size: 1.6rem;
+    color: white;
+   }
+   span{
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 1.5rem;
+   }
+
+   div{
+    display: flex;
+    flex-direction: column;
+    span{
+        font-size: 1.4rem;
+        color: grey;
+        margin: 0;
+    }
+   }
 `;
 
 const ButtonRemove = styled.button`
@@ -31,8 +63,8 @@ const ButtonRemove = styled.button`
    font-size: 2.5rem;
 `;
 
-export const ItemCart = ({ item, updateItem, removeItem }: Props) => {
-    const { name, price, quantity, img, prodId } = item;
+export const ItemCart = ({ item, updateItem, removeItem, extrasPrice }: Props) => {
+    const { name, price, quantity, prodId, extras } = item;
     const [quantityBtn, setQuantityBtn] = useState<number>(quantity);
 
     useEffect(() => {
@@ -45,7 +77,22 @@ export const ItemCart = ({ item, updateItem, removeItem }: Props) => {
 
     return (
         <ItemCard>
-            <p style={{ margin: '0 .5rem', fontSize: '1.6rem', fontWeight: 'bold'}}>{name}</p>
+            <ItemDescription>
+                {
+                    (extras) ?
+                        <div>
+                            <p>{name}</p>
+                            <span>{`+ ${extras.chedar} Chedar + ${extras.meat} Carne`}</span>
+                        </div>
+                        :
+                        <p>{name}</p>
+                }
+                <span>{`$ ${
+                    extras ? ( price + (extras.chedar * extrasPrice.chedar) + (extras.meat * extrasPrice.carne) )
+                    :
+                    price
+                }`}</span>
+            </ItemDescription>
             <MoreLessButton
                 number={quantityBtn}
                 setNumber={setQuantityBtn}
@@ -53,9 +100,9 @@ export const ItemCart = ({ item, updateItem, removeItem }: Props) => {
                 max={20} min={1} />
 
             <ButtonRemove
-            onClick={() => removeItem(prodId)}
+                onClick={() => removeItem(prodId)}
             >
-                <GiCancel color='red'/>
+                <GiCancel color='red' />
             </ButtonRemove>
         </ItemCard>
     )

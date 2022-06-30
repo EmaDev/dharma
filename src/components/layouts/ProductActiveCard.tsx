@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { itemCart } from '../../context/cartReducer';
 import { Button } from './Button';
+import { Extras } from './Extras';
 import { MoreLessButton } from './MoreLessButton';
 import { Spinner } from './Spinner';
 
@@ -48,6 +49,22 @@ const Precio = styled.p`
   margin: 0;
   padding: 0;
 `;
+
+const ExtrasButton = styled.div`
+    margin: 1rem;
+    text-align: start;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    span{
+        font-size: 2rem;
+        font-weight: bold;
+        color: #fff;
+        margin-right: .5rem;
+    }
+
+`;
+
 interface ProductProps {
     product: Product;
     addProdToCart: (item: itemCart) => void;
@@ -56,17 +73,21 @@ interface Product {
     name: string;
     ingredients: string;
     id: string;
-    img: number;
+    img: string;
     price: number;
-    extras?: {
-        chease: number;
-        meat: number;
-    }
+    extras?: Extras
+}
+interface Extras {
+    chedar: number;
+    meat: number;
 }
 export const ProductActiveCard = ({ product, addProdToCart }: ProductProps) => {
 
     const [quantityState, setQuantityState] = useState<number>(1);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isExtrasActive, setIsExtrasActive] = useState<boolean>(false);
+    const [extrasState, setExtrasState] = useState<Extras>({chedar: 0, meat: 0});
+    const {chedar, meat} = extrasState;
     const { id, ingredients, name, price, img } = product;
 
     const addProductToCart = () => {
@@ -74,23 +95,34 @@ export const ProductActiveCard = ({ product, addProdToCart }: ProductProps) => {
             price: price,
             name: name,
             quantity: quantityState,
-            prodId: id
+            extras: (chedar != 0 || meat != 0) ? 
+            {chedar, meat}
+            :
+            null,
+            prodId: (chedar === 0 && meat === 0) 
+            ? id : 
+            `${id}-${chedar}&${meat}`,
         });
+    }
+
+    const handleSetIsExtrasActive = () => {
+        setExtrasState({chedar: 0, meat: 0});
+        setIsExtrasActive(!isExtrasActive);
     }
 
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
-        },500);
+        }, 500);
     }, [id]);
 
     return (
         <>
             {
-                (isLoading) ? <div style={{height: '250px', display: 'flex', justifyContent: 'center'}}><Spinner/></div>
-                :
-                <Image src={require(`../../assets/hamburger${img}.png`)} alt={`${name} imagen`} />
+                (isLoading) ? <div style={{ height: '250px', display: 'flex', justifyContent: 'center' }}><Spinner /></div>
+                    :
+                    <Image src={img} alt={`${name} imagen`} />
             }
             <Name color="white">{name}</Name>
             <Description>{ingredients}</Description>
@@ -107,7 +139,20 @@ export const ProductActiveCard = ({ product, addProdToCart }: ProductProps) => {
                         max={20} min={1} />
                 </div>
             </OrderButtons>
-            <Button onClick={addProductToCart} text='Agregar al Carrito'/>
+            <ExtrasButton>
+                <span>Extras</span>
+                <input type={'checkbox'} 
+                onChange={handleSetIsExtrasActive}
+                checked={isExtrasActive}/>
+
+            </ExtrasButton>
+            { 
+              (isExtrasActive) && 
+              <Extras 
+              setState={setExtrasState}
+              />
+            }
+            <Button onClick={addProductToCart} text='Agregar al Carrito' />
         </>
     )
 }

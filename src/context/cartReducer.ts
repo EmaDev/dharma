@@ -1,14 +1,18 @@
+const MAX_PROD = 20;
+
 export interface itemCart {
     prodId: string;
     name: string;
     quantity: number;
     price: number;
+    extras?: {
+        chedar: number;
+        meat: number;
+    } | null;
     img?: string;
 }
 export interface CartState {
     cart: itemCart[];
-    //date: Date;
-    //client: {name: string; address:string};
 }
 
 export type CartAction =
@@ -25,29 +29,29 @@ export const cartReducer = (state: CartState, action: CartAction): CartState => 
             return prevItem ?
                 {
                     ...state,
-                    cart: state.cart.map( item => 
-                    item.prodId === action.payload.prodId
-                    ? {...item,quantity: item.quantity + action.payload.quantity}    
-                    : item
-                    )
+                    cart: state.cart.map(item => (
+                        item.prodId === action.payload.prodId && item.quantity + action.payload.quantity <= MAX_PROD
+                            ? { ...item, quantity: item.quantity + action.payload.quantity }
+                            : item
+                    ))
                 }
                 :
                 {
                     ...state,
-                    cart: [...state.cart, action.payload] 
+                    cart: [...state.cart, action.payload]
                 }
-        case 'updateItem': 
+        case 'updateItem':
             const itemSearched = state.cart.find(item => item.prodId === action.payload.itemId);
-            
+
             return itemSearched ?
-            {
-                ...state,
-                cart: state.cart.map( item => item.prodId === action.payload.itemId
-                ? {...item, quantity: action.payload.quant} : item    
-                )
-            }
-            : 
-            {...state};
+                {
+                    ...state,
+                    cart: state.cart.map(item => item.prodId === action.payload.itemId
+                        ? { ...item, quantity: action.payload.quant } : item
+                    )
+                }
+                :
+                { ...state };
         case 'removeItem':
             return {
                 ...state,
@@ -61,23 +65,4 @@ export const cartReducer = (state: CartState, action: CartAction): CartState => 
         default:
             return state;
     }
-}
-
-const filterState = (cart: itemCart[], payload: itemCart) => {
-
-    let isInclude = false;
-
-    const newCart = cart.forEach(item => {
-        if (item.prodId === payload.prodId) {
-            isInclude = true;
-            item.quantity = item.quantity + payload.quantity;
-        }
-    })
-
-    if (!isInclude) {
-        //newCart.push(payload);
-    }
-
-    console.log(newCart);
-
 }

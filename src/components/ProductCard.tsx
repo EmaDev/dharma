@@ -7,6 +7,8 @@ import { ProductOptionCard } from './OptionSelect';
 import { MoreLessButton } from './layouts/MoreLessButton';
 import { CartContext } from '../context/CartContext';
 import { ProductActiveCard } from './layouts/ProductActiveCard';
+import { getAllProducts, getExtrasPrice } from '../firebase/dbQueries';
+import { Spinner } from './layouts/Spinner';
 
 const Container = styled.div`
    width: 90%;
@@ -43,43 +45,42 @@ const SelectOptions = styled.div`
    overflow: auto;
 `;
 
-
 interface Product {
    name: string;
    ingredients: string;
    id: string;
-   img: number;
+   img: string;
    price: number;
 }
-const PRODUCTS: Product[] = [
-   { id: '186262', price: 690,img: 1,name: 'Chease Burger', ingredients: '200gr. de Carne, Doble Cheddar, Panceta,Cebolla (Crispy o Grilled), BBQ Jack Daniels' },
-   { id: '4529', price: 540,img: 2,name: 'CUZCO HATUCHAY', ingredients: 'Queso reggianito, batata frita, sarza (cebolla, limón, jalapeño, cilantro) y salsa Huancaína' },
-   { id: '8226', price: 980,img: 3,name: 'Gringa', ingredients: 'Queso cheddar, panceta ahumada, pepinos en pickle y ketchup DENIRO' },
-   { id: '895996', price: 950,img: 4,name: 'Parrillera', ingredients: 'Queso provoleta con chimichurri, morcilla, morrón a la plancha, cebolla roja y ketchup ahumado' }
-]
 
 export const ProductCard = () => {
-   const [products, setProducts] = useState<Product[]>(PRODUCTS);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+   const [products, setProducts] = useState<Product[]>([]);
    const [selectActive, setSelectActive] = useState<boolean>(false);
-   const [activeProduct, setActiveProduct] = useState<Product>(PRODUCTS[0]);
-   //const [quantityState, setQuantityState] = useState<number>(1);
+   const [activeProduct, setActiveProduct] = useState<Product>();
    const { addItemToCart } = useContext(CartContext);
-   //const { id, ingredients, name,price,img } = activeProduct;
 
    useEffect(() => {
-      //TODO: traer productos
-   });
+      getProductsFromDataBase();
+   }, []);
 
-
+   const getProductsFromDataBase = async () => {
+      const resp = await getAllProducts();
+      setProducts(resp);
+      setActiveProduct(resp[0]);
+      setIsLoading(false);
+   }
    const handleSetProductActive = (id: string) => {
       const result = products.find(prod => prod.id === id);
       if (result) {
          setActiveProduct(result);
-         //setQuantityState(1);
          setSelectActive(false);
       }
    }
 
+   if (isLoading) {
+      return (<Spinner/>)
+   }
    return (
       <Container>
          <BorderDiv size={{ height: 40, width: 5 }} position={'right'} dif={{ x: 70, z: 5 }} />
@@ -92,7 +93,8 @@ export const ProductCard = () => {
             }
          </Select>
          {
-            (selectActive) &&
+
+            (selectActive && activeProduct) &&
             <SelectOptions>
                {products.map(prod => (
                   <ProductOptionCard
@@ -106,10 +108,13 @@ export const ProductCard = () => {
             </SelectOptions>
          }
 
-         <ProductActiveCard 
-         product={activeProduct} 
-         addProdToCart={addItemToCart}/>
-         
+         {
+            (activeProduct) && 
+            <ProductActiveCard
+            product={activeProduct}
+            addProdToCart={addItemToCart} />
+         }
+
       </Container>
    )
 }
