@@ -8,6 +8,7 @@ const Btn = styled.button`
    font-size: 1.6rem;
    font-weight: bold;
    color: white;
+   border: none;
    border-radius: 6px;
 `;
 interface Props{

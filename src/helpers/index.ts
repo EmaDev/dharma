@@ -1,1 +1,1 @@
-export const PHONE_NUMBER='11164340872';
+export const PHONE_NUMBER='1164340872';

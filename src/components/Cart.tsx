@@ -30,32 +30,32 @@ const TotalText = styled.h5`
     margin: 2rem 0;
 `;
 
-const ButtonConfirm = styled.button`
+const ButtonConfirm = styled.a`
    background-color: purple;
    padding: 1rem .3rem;
    border-radius: 6px;
-   width: 100%;
-   a{
-    text-decoration: none;
-    color: white;
-    font-size: 1.6rem;
-    font-weight: bold;
-   }
+   display: block;
+   text-decoration: none;
+   color: white;
+   font-size: 1.6rem;
+   font-weight: bold;
+   text-align: center;
+
 `;
 
 export const Cart = () => {
 
-    const { cart, updateItem, removeItemToCart, extras} = useContext(CartContext);
+    const { cart, updateItem, removeItemToCart, extras } = useContext(CartContext);
     const { theme } = useContext(ThemeContext);
 
     const totalCalculator = () => {
         let total = 0;
         cart.forEach(item => {
-            if(item.extras){
-                total += (item.price + 
-                (item.extras.chedar * extras.chedar) + 
-                (item.extras.meat * extras.carne)) * item.quantity; 
-            }else{
+            if (item.extras) {
+                total += (item.price +
+                    (item.extras.chedar * extras.chedar) +
+                    (item.extras.meat * extras.carne)) * item.quantity;
+            } else {
                 total += item.price * item.quantity;
             }
         });
@@ -65,18 +65,26 @@ export const Cart = () => {
     const setMessageOrder = () => {
         let msg = '';
         cart.forEach((item, i) => {
-            if (i === 0) {
-                msg += `${item.name}X${item.quantity}`;
+
+            if (item.extras) {
+                if (item.extras.chedar > 0 && item.extras.meat > 0) {
+                    msg += ` -- ${item.name} (Chedar: ${item.extras.chedar},Carne:+ ${item.extras.meat}) X ${item.quantity}`;
+                } else if (item.extras.chedar > 0) {
+                    msg += ` -- ${item.name} (Chedar: ${item.extras.chedar}) X ${item.quantity}`;
+                } else {
+                    msg += ` -- ${item.name} (Carne: ${item.extras.meat}) X ${item.quantity}`;
+                }
             } else {
-                msg += ` - ${item.name}X${item.quantity}`;
+                msg += ` -- ${item.name} X ${item.quantity}`;
             }
+
         });
 
         return (
-            <a id="app-whatsapp" target="_blanck"
+            <ButtonConfirm id="app-whatsapp" target="_blanck"
                 href={`https://api.whatsapp.com/send?phone=+54${PHONE_NUMBER}&text=${msg}`}>
                 Confirmar Pedido
-            </a>
+            </ButtonConfirm>
         )
     }
 
@@ -99,10 +107,9 @@ export const Cart = () => {
                         />
                     ))
                 }
-                    {totalCalculator()}
-                <ButtonConfirm>
-                    {setMessageOrder()}
-                </ButtonConfirm>
+                {totalCalculator()}
+                {setMessageOrder()}
+
             </Container>
         </>
 
