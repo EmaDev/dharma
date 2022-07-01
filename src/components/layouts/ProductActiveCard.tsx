@@ -90,6 +90,10 @@ export const ProductActiveCard = ({ product, addProdToCart }: ProductProps) => {
     const {chedar, meat} = extrasState;
     const { id, ingredients, name, price, img } = product;
 
+    useEffect( () => {
+        setQuantityState(1);
+    },[product]);
+
     const addProductToCart = () => {
         addProdToCart({
             price: price,
