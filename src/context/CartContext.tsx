@@ -15,6 +15,7 @@ interface ItemCart {
 type CartContextProps = {
     cart: ItemCart[];
     extras: { chedar: number; carne: number};
+    phone: string;
     addItemToCart: (item: ItemCart) => void;
     removeItemToCart: (id: string) => void;
     deleteCart: () => void;
@@ -29,11 +30,12 @@ const initialState: CartState = {
 export const CartProvider = ({ children }: any) => {
     const [cartState, dispatch] = useReducer(cartReducer, initialState);
     const [extras, setExtras] = useState({ chedar: 0, carne: 0});
-
-    useEffect( () => {
+    const [phone, setPhone] = useState<string>('');
+     useEffect( () => {
         const funct = async() => {
             const resp = await getExtrasPrice();
-            setExtras(resp); 
+            setPhone(resp?.phone);
+            setExtras(resp?.extras); 
         }
         funct();
     },[]);
@@ -52,6 +54,7 @@ export const CartProvider = ({ children }: any) => {
         <CartContext.Provider value={{
             cart: cartState.cart,
             extras,
+            phone,
             addItemToCart,
             removeItemToCart,
             deleteCart,

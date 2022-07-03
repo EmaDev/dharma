@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../context/CartContext';
 import { ThemeContext } from '../context/ThemeContext';
-import { PHONE_NUMBER } from '../helpers';
 import { ItemCart } from './ItemCart';
 
 const Container = styled.section<any>`
@@ -45,7 +44,7 @@ const ButtonConfirm = styled.a`
 
 export const Cart = () => {
 
-    const { cart, updateItem, removeItemToCart, extras } = useContext(CartContext);
+    const { cart, updateItem, removeItemToCart, extras, phone } = useContext(CartContext);
     const { theme } = useContext(ThemeContext);
 
     const totalCalculator = () => {
@@ -82,7 +81,7 @@ export const Cart = () => {
 
         return (
             <ButtonConfirm id="app-whatsapp" target="_blanck"
-                href={`https://api.whatsapp.com/send?phone=+54${PHONE_NUMBER}&text=${msg}`}>
+                href={`https://api.whatsapp.com/send?phone=+54${phone}&text=${msg}`}>
                 Confirmar Pedido
             </ButtonConfirm>
         )

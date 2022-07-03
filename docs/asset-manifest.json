@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/foodandeat/static/css/main.13e2fe3c.css",
-    "main.js": "/foodandeat/static/js/main.8be970c0.js",
+    "main.js": "/foodandeat/static/js/main.eab46ea0.js",
     "static/media/xxxl-back.png": "/foodandeat/static/media/xxxl-back.dbfb25c3ad4d2398a05d.png",
     "static/media/bg-mobile.png": "/foodandeat/static/media/bg-mobile.ebfd938c8517a8a20f19.png",
     "index.html": "/foodandeat/index.html",
     "main.13e2fe3c.css.map": "/foodandeat/static/css/main.13e2fe3c.css.map",
-    "main.8be970c0.js.map": "/foodandeat/static/js/main.8be970c0.js.map"
+    "main.eab46ea0.js.map": "/foodandeat/static/js/main.eab46ea0.js.map"
   },
   "entrypoints": [
     "static/css/main.13e2fe3c.css",
-    "static/js/main.8be970c0.js"
+    "static/js/main.eab46ea0.js"
   ]
 }

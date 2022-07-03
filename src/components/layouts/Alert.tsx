@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
 import { IoMdClose, IoMdAlert } from 'react-icons/io';
 import { ThemeContext } from '../../context/ThemeContext';
-import { PHONE_NUMBER } from '../../helpers';
+import { CartContext } from '../../context/CartContext';
 
 interface Props {
     text?: string;
@@ -42,6 +42,7 @@ const CloseButton = styled.button<any>`
 export const Alert = ({ text }: Props) => {
     const [activeButton, setActiveButton] = useState(true);
     const { theme } = useContext(ThemeContext);
+    const {phone} = useContext(CartContext);
     return (
         <Container>
             {
@@ -49,7 +50,7 @@ export const Alert = ({ text }: Props) => {
                     <AlertContent color={theme.palette.purpleLigth}>
                         <Text color={theme.palette.txtPrimary}>
                             <a id="app-whatsapp" target="_blanck" 
-                            href={`https://api.whatsapp.com/send?phone=+54${PHONE_NUMBER}&text=Quiero hacer un pedido`}>
+                            href={`https://api.whatsapp.com/send?phone=+54${phone}&text=Quiero hacer un pedido`}>
                             {text}
                             </a>
                         </Text>
