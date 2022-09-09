@@ -67,14 +67,14 @@ export const Cart = () => {
 
             if (item.extras) {
                 if (item.extras.chedar > 0 && item.extras.meat > 0) {
-                    msg += ` -- ${item.name} (Chedar: ${item.extras.chedar},Carne:+ ${item.extras.meat}) X ${item.quantity}`;
+                    msg += ` --${item.quantity} X ${item.name} (Chedar: ${item.extras.chedar},Carne:+ ${item.extras.meat})`;
                 } else if (item.extras.chedar > 0) {
-                    msg += ` -- ${item.name} (Chedar: ${item.extras.chedar}) X ${item.quantity}`;
+                    msg += ` -- ${item.quantity} x ${item.name} (Chedar: ${item.extras.chedar})`;
                 } else {
-                    msg += ` -- ${item.name} (Carne: ${item.extras.meat}) X ${item.quantity}`;
+                    msg += ` -- ${item.quantity} x ${item.name} (Carne: ${item.extras.meat})`;
                 }
             } else {
-                msg += ` -- ${item.name} X ${item.quantity}`;
+                msg += ` -- ${item.quantity} x ${item.name}`;
             }
 
         });
