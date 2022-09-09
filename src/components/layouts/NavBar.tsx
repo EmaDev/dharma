@@ -115,7 +115,10 @@ const NavMenuContentMobile = styled.ul`
    }
 `;
 
-
+const Logo = styled.img`
+   height: 25px;
+   margin: 0 1rem;
+`;
 export const NavBar = () => {
 
     const [activeMenu, setActiveMenu] = useState(false);
@@ -127,10 +130,7 @@ export const NavBar = () => {
     return (
         <Container>
             <NavMenuContent>
-                <Title>
-                    <span style={{ color: 'white' }}>Food</span>
-                    <span style={{ color: 'purple' }}>AndEat</span>
-                </Title>
+                <Logo src={require('../../assets/logo.png')}/>
                 <MenuUl>
                     <li><a href="#menu">Menu</a></li>
                     <li><a href="#carrito">Carrito</a></li>
